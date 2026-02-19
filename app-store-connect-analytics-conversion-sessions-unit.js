@@ -3,7 +3,7 @@
 // @namespace    https://tampermonkey.net/
 // @version      1.1.3
 // @description  Adds Impressions→Downloads conversion rate and Sessions per Unit to the Apps table.
-// @match        https://appstoreconnect.apple.com/analytics/apps/d30*
+// @match        https://appstoreconnect.apple.com/analytics/apps/*
 // @updateURL    https://raw.githubusercontent.com/eitjuh/tampermonkey-scripts/main/app-store-connect-analytics-conversion-sessions-unit.js
 // @downloadURL  https://raw.githubusercontent.com/eitjuh/tampermonkey-scripts/main/app-store-connect-analytics-conversion-sessions-unit.js
 // @grant        none
