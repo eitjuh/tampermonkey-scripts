@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         YouTube Clean Feed (Productivity Mode)
 // @namespace    https://tampermonkey.net/
-// @version      1.2.1
-// @description  Removes homepage recommendations, distracting nav links, and tags/chips on YouTube.
+// @version      1.3.0
+// @description  Removes recommendations, distracting nav links, comments, and watch-page suggestions on YouTube.
 // @match        https://www.youtube.com/*
 // @grant        none
 // ==/UserScript==
@@ -54,6 +54,21 @@
       ytd-guide-section-renderer:has(ytd-guide-collapsible-section-entry-renderer a[href^="/feed/subscriptions"]),
       ytd-guide-section-renderer:has(a[href^="/feed/explore"]),
       ytd-guide-section-renderer:has(a[href^="/premium"]) {
+        display: none !important;
+      }
+
+      /* Watch page: hide comments area */
+      ytd-watch-flexy #comments,
+      ytd-watch-flexy ytd-comments,
+      ytd-watch-flexy ytd-item-section-renderer[section-identifier="comment-item-section"] {
+        display: none !important;
+      }
+
+      /* Watch page: hide right-side recommendations rail */
+      ytd-watch-flexy ytd-watch-next-secondary-results-renderer #items,
+      ytd-watch-flexy ytd-watch-next-secondary-results-renderer ytd-compact-video-renderer,
+      ytd-watch-flexy ytd-watch-next-secondary-results-renderer ytd-compact-radio-renderer,
+      ytd-watch-flexy ytd-watch-next-secondary-results-renderer ytd-continuation-item-renderer {
         display: none !important;
       }
     `;
