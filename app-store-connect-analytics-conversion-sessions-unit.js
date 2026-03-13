@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         App Store Connect Analytics: Conversion + Sessions/Unit
 // @namespace    https://tampermonkey.net/
-// @version      1.1.3
+// @version      1.1.4
 // @description  Adds Impressions→Downloads conversion rate and Sessions per Unit to the Apps table.
 // @match        https://appstoreconnect.apple.com/analytics/apps/*
 // @updateURL    https://raw.githubusercontent.com/eitjuh/tampermonkey-scripts/main/app-store-connect-analytics-conversion-sessions-unit.js
@@ -54,15 +54,16 @@
   
     function getPrimaryMetricFromCell(td) {
       if (!td) return NaN;
-  
-      // The primary metric is typically inside p[title] > a, with p[title] having the exact value.
-      const pTitle = td.querySelector("p[title]");
-      if (pTitle) return parseMetricFromTitleOrText(pTitle);
-  
+
+      // Prefer the <a> element — it contains the actual displayed metric value.
+      // Avoid relying on the parent <p>'s title attribute, which may hold
+      // a different figure (e.g. unique-device count vs. total).
       const a = td.querySelector("a");
       if (a) return parseMetricFromTitleOrText(a);
-  
-      // Fallback: first text-like element
+
+      const pTitle = td.querySelector("p[title]");
+      if (pTitle) return parseMetricFromTitleOrText(pTitle);
+
       return parseMetricFromTitleOrText(td);
     }
   
